@@ -1,8 +1,8 @@
-# Requirements:AI Powered Learning platform
+# Requirements:AI Powered Learning platform(Neurolearn)
 
 ## Overview
 
-AI-powered learning platform for beginner developers. Provides code explanations, interactive chat assistance, and learning progress tracking. Built for a 48-hour hackathon.
+AI-powered learning platform(Neurolearn) for beginner developers. Provides code explanations, interactive chat assistance, and learning progress tracking. Built for a 48-hour hackathon.
 
 **Target Users:** Beginner developers and coding students  
 **Core Features:** Code analysis, AI chat, history tracking  
