@@ -1,4 +1,4 @@
-# Design: CodeMentor AI
+# Design: Neurolearn AI
 
 ## Overview
 
@@ -39,7 +39,7 @@ Full-stack web app with Django REST backend and React TypeScript frontend. Provi
 ## Technology Stack
 
 **Backend:** Python 3.10+, Django 4.2+, DRF 3.14+, JWT auth, OpenAI SDK  
-**Frontend:** React 18+, TypeScript 5+, Vite, React Router, Axios, Monaco Editor, Tailwind  
+**Frontend:** React 18+, Vite, React Router, Axios, Monaco Editor, Tailwind  
 **Database:** PostgreSQL (prod), SQLite (dev)  
 **Deployment:** Railway/Render (backend), Vercel/Netlify (frontend)
 
@@ -154,32 +154,32 @@ Properties are formal statements about system behavior that must hold true acros
 19. **Operations respect ownership** - User can message/retrieve own sessions, 403 for others' sessions
 20. **Sessions ordered by activity** - Sessions returned newest first by updated_at
 21. **Messages in chronological order** - Messages returned oldest first by created_at
-22. **AI failures don't corrupt chat** - API failures return error without storing incomplete data
+
 
 ### Rate Limiting & Usage (3 properties)
 
-23. **Excessive requests throttled** - Requests exceeding limit return rate limit error
-24. **Usage tracked** - AI calls record tokens and cost
-25. **Exhausted credits prevent calls** - No credits returns service unavailable, no API call
+22. **Excessive requests throttled** - Requests exceeding limit return rate limit error
+23. **Usage tracked** - AI calls record tokens and cost
+24. **Exhausted credits prevent calls** - shows error message when AI usage limit hits
 
 ### Data Integrity (3 properties)
 
-26. **Referential integrity maintained** - Foreign keys valid and enforced
-27. **Deletion cascades** - User deletion removes all associated data
-28. **Entities have timestamps** - All entities have created_at, mutable have updated_at
-
+25. **Referential integrity maintained** - Foreign keys valid and enforced
+26. **Deletion cascades** - User deletion removes all associated data
+27. **Entities have timestamps** - All entities have created_at, mutable have updated_at
+    
 ### Error Handling (6 properties)
 
-29. **Validation errors include details** - Validation failures indicate field and reason
-30. **Auth errors don't leak info** - Auth failures don't reveal if email exists
-31. **Authorization errors clear** - 403 responses indicate insufficient permissions
-32. **Server errors safe** - Unexpected errors return generic message, log details
-33. **Status codes match responses** - 2xx success, 4xx client error, 5xx server error
-34. **Success returns confirmation** - Successful operations return confirmation + data
+28. **Validation errors include details** - Validation failures indicate field and reason
+39. **Auth errors don't leak info** - Auth failures don't reveal if email exists
+30. **Authorization errors clear** - 403 responses indicate insufficient permissions
+31. **Server errors safe** - Unexpected errors return generic message, log details
+32. **Status codes match responses** - 2xx success, 4xx client error, 5xx server error
+33. **Success returns confirmation** - Successful operations return confirmation + data
 
 ### Security (1 property)
 
-35. **Input validated** - All user input validated and sanitized to prevent injection
+34. **Input validated** - All user input validated and sanitized to prevent injection
 
 ## Error Handling
 
