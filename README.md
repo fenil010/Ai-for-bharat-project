@@ -1,133 +1,110 @@
-NeuroLearn
+# Ai for Bharat Project 🚀
 
-NeuroLearn is an AI-powered backend system built on a self-hosted custom model.
-It does not rely on external API keys or third-party billing systems.
+## Table of Contents
 
-The system focuses on request control, server protection, and intelligent rate limiting to ensure stable and scalable AI usage.
+- [Overview](#overview)
+- [Installation Instructions](#installation-instructions)
+- [API Documentation](#api-documentation)
+- [Configuration Details](#configuration-details)
+- [Project Structure](#project-structure)
+- [Monitoring Information](#monitoring-information)
+- [Docker Deployment](#docker-deployment)
+- [Testing Guidelines](#testing-guidelines)
+- [Development Setup](#development-setup)
+- [Roadmap](#roadmap)
+- [Contributing Guidelines](#contributing-guidelines)
 
-⸻
+## Overview
 
-User Story
+Welcome to the Ai for Bharat Project! This project aims to leverage AI technologies to solve real-world problems in Bharat. Through this project, we engage with various stakeholders, gather requirements, and deliver impactful solutions.
 
-As an admin, I want to control AI usage to prevent server overload and misuse of the self-hosted model.
+## Installation Instructions
 
-⸻
+To get started with the project, follow these steps:
 
-Features
-	•	Request-based rate limiting
-	•	Per-user and global request tracking
-	•	Concurrent request control
-	•	High-traffic warning logs
-	•	Automatic blocking of excessive requests
-	•	No external API dependency
-	•	No token or credit-based billing
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/fenil010/Ai-for-bharat-project.git
+   cd Ai-for-bharat-project
+   ```
 
-⸻
+2. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
 
-System Overview
-	1.	Client sends request to /generate
-	2.	Middleware validates:
-	•	Requests per minute
-	•	Requests per user
-	•	Global traffic volume
-	•	Active concurrent requests
-	3.	If limits are exceeded:
-	•	System returns HTTP 429
-	4.	If within limits:
-	•	Request is forwarded to the local AI model
-	5.	Request details are logged for monitoring and analysis
+3. **Run the Application:**
+   ```bash
+   npm start
+   ```
 
-⸻
+## API Documentation
 
-Rate Limiting Configuration
+Explore the various APIs offered by this project:
+- **GET /api/v1/resource**: Fetches resource data.
+- **POST /api/v1/resource**: Creates new resource data.
 
-Example configuration:
+## Configuration Details
 
-{
-  "max_requests_per_minute_per_user": 20,
-  "max_global_requests_per_minute": 500,
-  "max_concurrent_requests": 50
-}
+| Parameter | Description |
+|-----------|-------------|
+| `API_KEY` | Your API key for accessing the service |
+| `DB_URL`  | URL for connecting to the database |
 
+## Project Structure
 
-⸻
+```
+Ai-for-bharat-project/
+├── src/              # Source code
+├── test/             # Test cases
+├── docs/             # Documentation
+├── .env              # Environment variables
+└── README.md         # Project documentation
+```
 
-Project Structure
+## Monitoring Information
 
-/src
- ├── middleware/
- │    └── rateLimiter.js
- ├── services/
- │    └── localModelService.js
- ├── utils/
- │    └── requestLogger.js
- ├── config/
- │    └── limits.json
- └── server.js
+To monitor the application, use tools like Prometheus and Grafana to visualize metrics and logs.
 
+## Docker Deployment
 
-⸻
+To deploy the application with Docker, follow these commands:
+```bash
+# Build the Docker image
+docker build -t ai-for-bharat .
 
-Example Error Response
+# Run the Docker container
+docker run -p 80:80 ai-for-bharat
+```
 
-When rate limit is exceeded:
+## Testing Guidelines
 
-{
-  "error": "Too many requests. Please try again later."
-}
+Run unit tests using the following command:
+```bash
+npm test
+```
 
+For integration tests:
+```bash
+npm run test:integration
+```
 
-⸻
+## Development Setup
 
-Monitoring Metrics
+To set up a development environment:
+1. Follow the installation instructions above.
+2. Make sure to install development dependencies.
 
-NeuroLearn tracks:
-	•	Total number of requests
-	•	Requests per user
-	•	Requests per minute
-	•	Active concurrent requests
-	•	Peak usage periods
+## Roadmap
 
-⸻
+- **Q1 2026**: Implement feature X
+- **Q2 2026**: Launch Version 1.0
 
-Environment Variables
+## Contributing Guidelines
 
-PORT=5000
-MAX_REQUESTS_PER_MINUTE=20
-MAX_GLOBAL_REQUESTS=500
-MAX_CONCURRENT_REQUESTS=50
+We welcome contributions! Please read our guidelines on how to contribute:
+1. Fork the repo.
+2. Create a new branch for your feature.
+3. Submit a pull request for review.
 
-
-⸻
-
-Self-Hosted Model
-	•	Runs locally or on private infrastructure
-	•	No external API usage
-	•	No per-token billing
-	•	Full infrastructure and performance control
-	•	Fully customizable model behavior
-
-⸻
-
-Future Improvements
-	•	Admin dashboard for real-time monitoring
-	•	Adaptive rate limiting
-	•	Auto-scaling infrastructure
-	•	Queue-based request handling
-	•	Distributed rate limiting (Redis)
-	•	CPU/GPU usage monitoring
-
-⸻
-
-Tech Stack
-	•	Node.js / Express
-	•	Self-hosted AI model
-	•	Middleware-based rate limiting
-	•	Logging and monitoring utilities
-
-⸻
-
-License
-
-MIT License
-
+Happy coding! 😊
