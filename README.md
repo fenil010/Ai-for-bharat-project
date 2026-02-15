@@ -1,110 +1,141 @@
-# Ai for Bharat Project 🚀
+# AI for Bharat Project (Neurolearn)
 
-## Table of Contents
+An AI-powered learning platform for beginner developers. Neurolearn explains code line-by-line, provides an interactive chat tutor, and tracks learning progress over time.
 
-- [Overview](#overview)
-- [Installation Instructions](#installation-instructions)
-- [API Documentation](#api-documentation)
-- [Configuration Details](#configuration-details)
-- [Project Structure](#project-structure)
-- [Monitoring Information](#monitoring-information)
-- [Docker Deployment](#docker-deployment)
-- [Testing Guidelines](#testing-guidelines)
-- [Development Setup](#development-setup)
+This repository currently contains product requirements and system design docs. Implementation is planned and will be added in subsequent milestones.
+
+## Contents
+
+- [What this is](#what-this-is)
+- [Key capabilities](#key-capabilities)
+- [Target stack](#target-stack)
+- [Architecture overview](#architecture-overview)
+- [API surface](#api-surface)
+- [Data model](#data-model)
+- [Environment variables](#environment-variables)
+- [Local development plan](#local-development-plan)
+- [Testing strategy](#testing-strategy)
+- [Repository map](#repository-map)
 - [Roadmap](#roadmap)
-- [Contributing Guidelines](#contributing-guidelines)
+- [Contributing](#contributing)
 
-## Overview
+## What this is
 
-Welcome to the Ai for Bharat Project! This project aims to leverage AI technologies to solve real-world problems in Bharat. Through this project, we engage with various stakeholders, gather requirements, and deliver impactful solutions.
+Neurolearn is a hackathon-sized MVP focused on learning outcomes, not just answers. It provides code explanations, a context-aware chat assistant, and a personal history dashboard.
 
-## Installation Instructions
+For full requirements and correctness properties, see:
+- [requirements.md](requirements.md)
+- [design.md](design.md)
 
-To get started with the project, follow these steps:
+## Key capabilities
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/fenil010/Ai-for-bharat-project.git
-   cd Ai-for-bharat-project
-   ```
+- Code explanations for Python, JavaScript, Java, and C++
+- Chat sessions with persistent context
+- History dashboard for snippets and chats
+- Rate limiting and usage tracking
+- JWT-based authentication with refresh tokens
 
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
+## Target stack
 
-3. **Run the Application:**
-   ```bash
-   npm start
-   ```
+- Backend: Django REST Framework, JWT auth, OpenAI SDK
+- Frontend: React + TypeScript, Vite, Monaco Editor, Tailwind
+- Data: PostgreSQL (production), SQLite (development)
 
-## API Documentation
+## Architecture overview
 
-Explore the various APIs offered by this project:
-- **GET /api/v1/resource**: Fetches resource data.
-- **POST /api/v1/resource**: Creates new resource data.
+Three-layer architecture: React UI, Django REST API, and PostgreSQL/SQLite data layer. The AI engine is accessed via the API layer.
 
-## Configuration Details
+## API surface
 
-| Parameter | Description |
-|-----------|-------------|
-| `API_KEY` | Your API key for accessing the service |
-| `DB_URL`  | URL for connecting to the database |
+Planned endpoints (see design doc for details):
 
-## Project Structure
+### Authentication
 
-```
-Ai-for-bharat-project/
-├── src/              # Source code
-├── test/             # Test cases
-├── docs/             # Documentation
-├── .env              # Environment variables
-└── README.md         # Project documentation
-```
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/token/refresh`
+- `GET /api/auth/user`
 
-## Monitoring Information
+### Code analysis
 
-To monitor the application, use tools like Prometheus and Grafana to visualize metrics and logs.
+- `POST /api/code/explain`
+- `GET /api/code/history`
+- `GET /api/code/history/:id`
+- `DELETE /api/code/history/:id`
 
-## Docker Deployment
+### Chat
 
-To deploy the application with Docker, follow these commands:
+- `POST /api/chat/sessions`
+- `GET /api/chat/sessions`
+- `POST /api/chat/sessions/:id/message`
+- `GET /api/chat/sessions/:id/messages`
+
+## Data model
+
+Primary entities: `User`, `CodeSnippet`, `ChatSession`, `ChatMessage`, `APIUsage`. See [design.md](design.md) for schema details.
+
+## Environment variables
+
+The following variables are expected for the backend when implementation lands:
+
+| Variable | Description |
+| --- | --- |
+| `DJANGO_SECRET_KEY` | Django secret key |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `OPENAI_API_KEY` | AI provider API key |
+| `JWT_ACCESS_TTL` | Access token lifetime (minutes) |
+| `JWT_REFRESH_TTL` | Refresh token lifetime (days) |
+
+## Local development plan
+
+When the codebase is added, the expected workflow will be:
+
+1. Clone the repository
+2. Start the backend
+3. Start the frontend
+
+Backend (planned):
 ```bash
-# Build the Docker image
-docker build -t ai-for-bharat .
-
-# Run the Docker container
-docker run -p 80:80 ai-for-bharat
+python -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+python backend/manage.py migrate
+python backend/manage.py runserver
 ```
 
-## Testing Guidelines
-
-Run unit tests using the following command:
+Frontend (planned):
 ```bash
-npm test
+cd frontend
+npm install
+npm run dev
 ```
 
-For integration tests:
-```bash
-npm run test:integration
+## Testing strategy
+
+Testing is designed around unit tests plus property-based tests. Planned tools:
+
+- Backend: pytest, pytest-django, Hypothesis
+- Frontend: Vitest, React Testing Library, fast-check
+
+## Repository map
+
 ```
-
-## Development Setup
-
-To set up a development environment:
-1. Follow the installation instructions above.
-2. Make sure to install development dependencies.
+.
+├── requirements.md     # Product requirements and acceptance criteria
+├── design.md           # Architecture, API, and data model
+└── README.md           # Project overview (this file)
+```
 
 ## Roadmap
 
-- **Q1 2026**: Implement feature X
-- **Q2 2026**: Launch Version 1.0
+- MVP implementation for authentication, code explanation, and chat
+- History dashboard and usage tracking
+- Deployment guides and Docker assets
 
-## Contributing Guidelines
+## Contributing
 
-We welcome contributions! Please read our guidelines on how to contribute:
-1. Fork the repo.
-2. Create a new branch for your feature.
-3. Submit a pull request for review.
+Contributions are welcome. If you want to help:
 
-Happy coding! 😊
+1. Open an issue describing the change
+2. Fork and create a feature branch
+3. Submit a pull request with a clear description and tests where applicable
