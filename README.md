@@ -37,19 +37,12 @@ For full requirements and correctness properties, see:
 ## Target stack
 
 - Backend: Django REST Framework, JWT auth, OpenAI SDK
-- Frontend: React + TypeScript, Vite, Monaco Editor, Tailwind
+- Frontend: React + javascript , Vite, Monaco Editor, Tailwind
 - Data: PostgreSQL (production), SQLite (development)
 
 ## Architecture overview
 
 Three-layer architecture: React UI, Django REST API, and PostgreSQL/SQLite data layer. The AI engine is accessed via the API layer.
-
-### Chat
-
-- `POST /api/chat/sessions`
-- `GET /api/chat/sessions`
-- `POST /api/chat/sessions/:id/message`
-- `GET /api/chat/sessions/:id/messages`
 
 ## Data model
 
