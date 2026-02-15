@@ -10,7 +10,6 @@ This repository currently contains product requirements and system design docs. 
 - [Key capabilities](#key-capabilities)
 - [Target stack](#target-stack)
 - [Architecture overview](#architecture-overview)
-- [API surface](#api-surface)
 - [Data model](#data-model)
 - [Environment variables](#environment-variables)
 - [Local development plan](#local-development-plan)
@@ -44,24 +43,6 @@ For full requirements and correctness properties, see:
 ## Architecture overview
 
 Three-layer architecture: React UI, Django REST API, and PostgreSQL/SQLite data layer. The AI engine is accessed via the API layer.
-
-## API surface
-
-Planned endpoints (see design doc for details):
-
-### Authentication
-
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/token/refresh`
-- `GET /api/auth/user`
-
-### Code analysis
-
-- `POST /api/code/explain`
-- `GET /api/code/history`
-- `GET /api/code/history/:id`
-- `DELETE /api/code/history/:id`
 
 ### Chat
 
